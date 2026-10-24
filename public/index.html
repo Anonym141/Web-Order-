@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Warmindo — Pesan dari Meja</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="menu-page">
+  <header class="topbar">
+    <a class="brand" href="/menu"><span class="brand-mark">W</span><span>warmin<span class="orange">do.</span><small>mie • kopi • cerita</small></span></a>
+  </header>
+  <main class="menu-wrap">
+    <section class="welcome">
+      <div>
+        <p class="eyebrow">SELAMAT DATANG DI WARMINDO</p>
+        <h1>Lagi lapar?<br><span class="orange">Gas, pesan aja.</span></h1>
+        <p class="muted">Pilih menu favoritmu, pesan langsung dari meja. Gampang dan nggak perlu antre.</p>
+      </div>
+      <div class="table-chip">MEJA <strong id="table-label">01</strong></div>
+    </section>
+    <div class="menu-tools">
+      <div class="search-box"><span>⌕</span><input id="search" placeholder="Cari menu favorit..." autocomplete="off"></div>
+      <div id="categories" class="categories"></div>
+    </div>
+    <section><div class="section-heading"><div><p class="eyebrow">MENU PILIHAN</p><h2>Menu hari ini</h2></div><span class="muted" id="menu-count"></span></div>
+      <div id="menu-grid" class="menu-grid"><div class="loading">Memuat menu...</div></div>
+    </section>
+  </main>
+  <button id="cart-fab" class="cart-fab" hidden><span>Keranjang</span><b id="cart-count">0</b><strong id="cart-total">Rp0</strong></button>
+  <div id="cart-modal" class="modal hidden">
+    <div class="modal-card cart-card">
+      <div class="modal-head"><div><p class="eyebrow">PESANAN KAMU</p><h2>Keranjang</h2></div><button class="icon-button" id="close-cart">✕</button></div>
+      <div id="cart-items"></div>
+      <div class="cart-total-row"><span>Total</span><strong id="cart-modal-total">Rp0</strong></div>
+      <label class="field-label">Nama (opsional)<input id="customer-name" placeholder="Nama kamu"></label>
+      <button id="checkout" class="btn btn-primary full">Lanjut ke pembayaran</button>
+      <p class="tiny muted">Pembayaran hanya simulasi untuk demo lokal.</p>
+    </div>
+  </div>
+  <div id="payment-modal" class="modal hidden">
+    <div class="modal-card payment-card">
+      <button class="icon-button close-payment" id="close-payment">✕</button>
+      <p class="eyebrow">CHECKOUT</p><h2>Pembayaran</h2>
+      <p class="muted">Pilih metode untuk simulasi pembayaran.</p>
+      <div class="payment-options">
+        <label class="payment-option"><input type="radio" name="payment" value="QRIS Simulasi" checked><span><b>▦ QRIS</b><small>Scan simulasi — tanpa transaksi sungguhan</small></span></label>
+        <label class="payment-option"><input type="radio" name="payment" value="Tunai"><span><b>Uang tunai</b><small>Bayar ke kasir setelah pesan</small></span></label>
+      </div>
+      <div id="payment-qr" class="payment-qr"></div>
+      <div class="cart-total-row"><span>Total pembayaran</span><strong id="payment-total">Rp0</strong></div>
+      <button id="confirm-payment" class="btn btn-primary full">Konfirmasi pesanan</button>
+      <p class="tiny muted">Tidak terhubung ke bank, e-wallet, atau payment gateway sungguhan.</p>
+    </div>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="/menu.js"></script>
+</body></html>

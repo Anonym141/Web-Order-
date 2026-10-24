@@ -1,0 +1,15 @@
+{
+  "name": "warmindo-ordering",
+  "version": "1.0.0",
+  "description": "Local QR ordering and business dashboard for a Warmindo",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.2.0",
+    "express": "^5.1.0",
+    "qrcode": "^1.5.4"
+  }
+}

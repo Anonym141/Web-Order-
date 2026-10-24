@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="id">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard — Warmindo</title><link rel="stylesheet" href="/style.css"></head>
+<body class="dashboard-page">
+  <aside class="sidebar">
+    <a class="brand" href="/dashboard"><span class="brand-mark">W</span><span>warmin<span class="orange">do.</span><small>BUSINESS PANEL</small></span></a>
+    <p class="side-label">WORKSPACE</p>
+    <button class="nav-item active" data-view="overview">▦ <span>Ringkasan</span></button>
+    <button class="nav-item" data-view="orders">☷ <span>Pesanan</span><b id="nav-order-count" class="nav-count">0</b></button>
+    <button class="nav-item" data-view="menus">▤ <span>Kelola menu</span></button>
+    <button class="nav-item" data-view="qr">▦ <span>QR Meja</span></button>
+    <div class="sidebar-bottom"><div class="user-avatar">W</div><div><b>Warmindo Admin</b><small>Local workspace</small></div><span class="online-dot"></span></div>
+  </aside>
+  <main class="dashboard-main">
+    <header class="dash-topbar"><div><p class="eyebrow">BUSINESS OVERVIEW</p><h1 id="page-title">Ringkasan bisnis</h1></div><div class="top-actions"><span class="live-indicator"><i></i> Sistem lokal aktif</span><a href="/menu" class="btn btn-light">Lihat halaman menu ↗</a></div></header>
+    <section id="view-overview" class="view active">
+      <div class="welcome-strip"><div><p class="eyebrow">HARI INI</p><h2>Halo, Admin.</h2><p class="muted">Pantau pesanan dan operasional Warmindo dari satu tempat.</p></div><div class="strip-icon">↗</div></div>
+      <div class="stats-grid">
+        <article class="stat-card"><div class="stat-label">Omzet lunas hari ini <span>↗</span></div><strong id="stat-revenue">Rp0</strong><small class="muted">Pesanan berstatus lunas</small></article>
+        <article class="stat-card"><div class="stat-label">Pesanan hari ini <span>▤</span></div><strong id="stat-orders">0</strong><small class="muted">Tidak termasuk dibatalkan</small></article>
+        <article class="stat-card"><div class="stat-label">Perlu ditangani <span>◷</span></div><strong id="stat-waiting">0</strong><small class="muted">Baru atau sedang diproses</small></article>
+        <article class="stat-card"><div class="stat-label">Stok menipis <span>!</span></div><strong id="stat-stock">0</strong><small class="muted">Menu dengan stok ≤ 5</small></article>
+      </div>
+      <div class="content-grid">
+        <section class="panel"><div class="panel-heading"><div><p class="eyebrow">LIVE ACTIVITY</p><h2>Pesanan terbaru</h2></div><button class="text-button" data-goto="orders">Lihat semua →</button></div><div id="recent-orders" class="table-wrap"></div></section>
+        <section class="panel"><div class="panel-heading"><div><p class="eyebrow">BEST SELLERS</p><h2>Menu terlaris</h2></div></div><div id="top-menu" class="top-menu-list"></div><div class="quick-note"><b>Otomatis diperbarui</b><p class="muted">Ringkasan dihitung dari pesanan yang tersimpan di SQLite.</p></div></section>
+      </div>
+    </section>
+    <section id="view-orders" class="view">
+      <div class="section-toolbar"><div><h2>Daftar pesanan</h2><p class="muted">Kelola status pesanan dan pembayaran.</p></div><button id="refresh-orders" class="btn btn-light">↻ Perbarui</button></div>
+      <div class="panel"><div id="orders-table" class="table-wrap"></div></div>
+    </section>
+    <section id="view-menus" class="view">
+      <div class="section-toolbar"><div><h2>Kelola menu</h2><p class="muted">Tambah, edit, ubah ketersediaan, dan stok menu.</p></div><button id="add-menu" class="btn btn-primary">＋ Tambah menu</button></div>
+      <div class="panel"><div id="menus-table" class="table-wrap"></div></div>
+    </section>
+    <section id="view-qr" class="view">
+      <div class="section-toolbar"><div><h2>QR code meja</h2><p class="muted">Buat QR simulasi untuk mengarahkan pelanggan ke halaman pemesanan.</p></div></div>
+      <div class="qr-layout">
+        <section class="panel qr-config"><p class="eyebrow">GENERATE QR</p><h2>Atur QR meja</h2><label class="field-label">Alamat akses<select id="base-url"></select></label><label class="field-label">Nomor meja<select id="qr-table"><option value="01">Meja 01</option><option value="02">Meja 02</option><option value="03">Meja 03</option><option value="04">Meja 04</option><option value="05">Meja 05</option><option value="06">Meja 06</option><option value="07">Meja 07</option><option value="08">Meja 08</option></select></label><button id="generate-qr" class="btn btn-primary full">Buat QR meja</button><div class="notice"><b>Tips localhost</b><p>Untuk scan dari HP, pilih alamat IP komputer (bukan localhost) dan pastikan HP serta komputer terhubung ke Wi-Fi yang sama.</p></div></section>
+        <section class="panel qr-preview"><div id="qr-placeholder"><div class="qr-placeholder-icon">▦</div><h2>QR meja kamu akan muncul di sini</h2><p class="muted">Pilih alamat dan nomor meja lalu klik “Buat QR meja”.</p></div><div id="qr-result" class="hidden"><img id="qr-image" alt="QR code meja"><p id="qr-url" class="qr-url"></p><div class="qr-actions"><button id="download-qr" class="btn btn-light">↓ Simpan QR</button><a id="open-qr-link" class="btn btn-primary" target="_blank" rel="noreferrer">Buka halaman ↗</a></div></div></section>
+      </div>
+    </section>
+    <footer class="dash-footer">WARMINDO ORDER · Local demo · Data tersimpan di SQLite</footer>
+  </main>
+  <div id="menu-modal" class="modal hidden"><div class="modal-card form-modal"><div class="modal-head"><div><p class="eyebrow">MENU MANAGEMENT</p><h2 id="menu-modal-title">Tambah menu</h2></div><button id="close-menu-modal" class="icon-button">✕</button></div>
+    <form id="menu-form"><input type="hidden" id="menu-id"><label class="field-label">Nama menu<input id="menu-name" required maxlength="100" placeholder="Contoh: Indomie goreng telur"></label><label class="field-label">Deskripsi<textarea id="menu-description" rows="2" placeholder="Deskripsi singkat menu"></textarea></label><div class="form-row"><label class="field-label">Kategori<select id="menu-category"><option>Mie</option><option>Makanan</option><option>Snack</option><option>Minuman</option></select></label><label class="field-label">Harga (Rp)<input id="menu-price" type="number" min="0" required></label></div><label class="field-label">URL foto menu<input id="menu-image" type="url" placeholder="https://..."></label><div class="form-row"><label class="field-label">Stok<input id="menu-stock" type="number" min="0" value="100"></label><label class="field-label">Ketersediaan<select id="menu-available"><option value="1">Tersedia</option><option value="0">Tidak tersedia</option></select></label></div><div class="form-actions"><button type="button" id="cancel-menu" class="btn btn-light">Batal</button><button type="submit" class="btn btn-primary">Simpan menu</button></div></form>
+  </div></div>
+  <div id="toast" class="toast"></div><script src="/dashboard.js"></script>
+</body></html>
